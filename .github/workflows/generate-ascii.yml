@@ -23,7 +23,7 @@ jobs:
          needs: Build_job
          runs-on: ubuntu-latest
          steps:
-         - name: Upload the File
+         - name: Download the File
            uses: actions/download-artifact@v4
            with:
              name: Snake-text-File
@@ -35,7 +35,7 @@ jobs:
         needs: Test_job
         runs-on: ubuntu-latest
         steps:
-         - name: Upload the File
+         - name: Download the File
            uses: actions/download-artifact@v4
            with:
              name: Snake-text-File
@@ -43,5 +43,5 @@ jobs:
            run: cat snake.txt
 
          - name: Deploy
-           run: echo "Deploying.....""
+           run: echo "Deploying....."
           

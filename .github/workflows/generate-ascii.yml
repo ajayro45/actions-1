@@ -5,7 +5,6 @@ on:
 
 env:
    USER_ID: ajro45
-   USER_PWD: AJAYRO$%#@
    URL: aa1302.io   
 
 jobs:
@@ -25,7 +24,7 @@ jobs:
              path: snake.txt
            
          - name: Loggin into the Website
-           run: echo $USER_ID/$USER_PWD/env.URL
+           run: echo $USER_ID/secrets.USER_PWD/env.URL
 
     Test_job:
          needs: Build_job
@@ -40,7 +39,7 @@ jobs:
            run: grep -i "dragon" snake.txt
 
          - name: Loggin into the Website
-           run: echo $USER_ID/$USER_PWD/env.URL
+           run: echo $USER_ID/secrets.USER_PWD/env.URL
 
     Deploy_job:
         needs: Test_job
@@ -53,7 +52,7 @@ jobs:
          - name: Read File
            run: cat snake.txt
          - name: Loggin into the Website
-           run: echo $USER_ID/$USER_PWD/env.URL
+           run: echo $USER_ID/secrets.USER_PWD/env.URL
 
          - name: Deploy
            run: echo "Deploying....."

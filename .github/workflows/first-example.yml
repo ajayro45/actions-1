@@ -9,7 +9,7 @@ on:
 
 jobs: 
     first_job:
-        runs-on: ubutnu-latest
+        runs-on: ubuntu-latest
         steps:
         - name: Welcome Mesage
           run: echo "My first Github Action Job"

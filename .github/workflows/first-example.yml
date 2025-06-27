@@ -4,7 +4,7 @@ on: push
 
 jobs: 
     first_job:
-        runs-on: ubutnu
+        runs-on: ubutnu-latest
         steps:
         - name: Welcome Mesage
           run: echo "My first Github Action Job"
@@ -12,5 +12,3 @@ jobs:
         - name: List files
           run: ls
 
-        - name: Read file
-          run: cat README.md

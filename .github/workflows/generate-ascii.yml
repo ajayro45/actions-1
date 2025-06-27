@@ -55,5 +55,5 @@ jobs:
            run: echo ${{vars.USER_ID}}/${{secrets.USER_PWD}}/env.URL
 
          - name: Deploy
-           run: echo "Deploying....."
+           run: echo "Deploying......"
           

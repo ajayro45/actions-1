@@ -24,7 +24,7 @@ jobs:
              path: snake.txt
            
          - name: Loggin into the Website
-           run: echo vars.$USER_ID/${{secrets.USER_PWD}}/env.URL
+           run: echo ${{vars.USER_ID}}/${{secrets.USER_PWD}}/env.URL
 
     Test_job:
          needs: Build_job
@@ -39,7 +39,7 @@ jobs:
            run: grep -i "dragon" snake.txt
 
          - name: Loggin into the Website
-           run: echo $vars.USER_ID/${{secrets.USER_PWD}}/env.URL
+           run: echo ${{vars.USER_ID}}/${{secrets.USER_PWD}}/env.URL
 
     Deploy_job:
         needs: Test_job
@@ -52,7 +52,7 @@ jobs:
          - name: Read File
            run: cat snake.txt
          - name: Loggin into the Website
-           run: echo $vars.USER_ID/${{secrets.USER_PWD}}/env.URL
+           run: echo ${{vars.USER_ID}}/${{secrets.USER_PWD}}/env.URL
 
          - name: Deploy
            run: echo "Deploying....."

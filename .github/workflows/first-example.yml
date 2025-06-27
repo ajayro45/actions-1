@@ -11,13 +11,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Checkout Repo
-          uses: actions/checkout@v4
+          uses: action/checkout@v4 
 
         - name: Welcome Mesage
-          run: echo "My first Github Action Job"
+          run: | 
+             echo "My first Github Action Job"
+             ls -lart 
+             cat README.md
 
-        - name: List files
-          run: ls
+        - name: Generate ASCII Artwork
+          run: cowsay -f snake "Reun for cover I am a Actor VISHAL....RAWR"  >> snake.txt
 
-        - name: Read file
-          run: cat README.md

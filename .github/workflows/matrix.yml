@@ -1,0 +1,21 @@
+name: Matrix
+
+on:
+   workflow_dispatch:
+concurrency: 
+  cancel-in-progress: false
+  group: workflow_dispatch
+
+jobs:
+    multi_os_pipeline:
+        strategy:
+          matrix:
+            os: [ubuntu-latest,windows-latest]
+            images: [hello-world,nginx]
+        runs-on: ${{matrix.os}}
+        steps:
+        - name: Echo Docker Details
+          run: docker info
+
+        - name: Run image on ${{matrix.os}}
+          run: docker run ${{matrix.images}}

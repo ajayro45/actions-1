@@ -1,7 +1,10 @@
 name: Generate ASCII network
 
 on:
-    push
+   workflow_dispatch:
+concurrency: 
+  cancel-in-progress: false
+  group: workflow_dispatch
 
 env:
   

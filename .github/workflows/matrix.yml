@@ -1,6 +1,7 @@
 name: Matrix
 
 on:
+   push:
    workflow_dispatch:
 concurrency: 
   cancel-in-progress: false
@@ -9,9 +10,17 @@ concurrency:
 jobs:
     multi_os_pipeline:
         strategy:
+          fail-fast: false
+          max-parallel: 2
           matrix:
             os: [ubuntu-latest,windows-latest]
             images: [hello-world,nginx]
+            exclude:
+              - images: nginx
+                os: windows-latest
+            include:
+              - images: amd64/alpine
+                os: ubuntu-latest
         runs-on: ${{matrix.os}}
         steps:
         - name: Echo Docker Details

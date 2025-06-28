@@ -1,7 +1,6 @@
 name: Matrix
 
 on:
-   push:
    workflow_dispatch:
 concurrency: 
   cancel-in-progress: false

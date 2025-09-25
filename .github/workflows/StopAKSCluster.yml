@@ -32,7 +32,7 @@ jobs:
 
           # Stop all VM scale sets in node RG
           az aks nodepool scale \
-          --resource-group <RESOURCE_GROUP> \
-          --cluster-name <CLUSTER_NAME> \
-          --name <NODEPOOL_NAME> \
+          --resource-group $RESOURCE_GROUP \
+          --cluster-name $CLUSTER_NAME \
+          --name $NODEPOOL_NAME \
           --node-count 0

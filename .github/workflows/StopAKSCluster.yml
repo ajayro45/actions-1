@@ -20,6 +20,7 @@ jobs:
           # Variables
           RESOURCE_GROUP="test"
           CLUSTER_NAME="aa-test-cluster"
+          NODEPOOL_NAME="agentpool"
 
           # Get node resource group
           NODE_RG=$(az aks show \
@@ -30,7 +31,8 @@ jobs:
           echo "Node RG: $NODE_RG"
 
           # Stop all VM scale sets in node RG
-          for VMSS in $(az vmss list -g $NODE_RG --query "[].name" -o tsv); do
-            echo "Stopping VMSS: $VMSS"
-            az vmss deallocate -g $NODE_RG -n $VMSS --no-wait
-          done
+          az aks nodepool scale \
+          --resource-group <RESOURCE_GROUP> \
+          --cluster-name <CLUSTER_NAME> \
+          --name <NODEPOOL_NAME> \
+          --node-count 0

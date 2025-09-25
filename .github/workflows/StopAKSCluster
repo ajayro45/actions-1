@@ -1,0 +1,36 @@
+name: Stop AKS Cluster
+
+on:
+  schedule:
+    - cron: "0 22 * * *"  # Runs every day at 22:00 UTC (10 PM UTC)
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  stop-aks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Stop AKS Cluster Nodes
+        run: |
+          # Variables
+          RESOURCE_GROUP="test"
+          CLUSTER_NAME="aa-test-cluster"
+
+          # Get node resource group
+          NODE_RG=$(az aks show \
+            --resource-group $RESOURCE_GROUP \
+            --name $CLUSTER_NAME \
+            --query nodeResourceGroup -o tsv)
+
+          echo "Node RG: $NODE_RG"
+
+          # Stop all VM scale sets in node RG
+          for VMSS in $(az vmss list -g $NODE_RG --query "[].name" -o tsv); do
+            echo "Stopping VMSS: $VMSS"
+            az vmss deallocate -g $NODE_RG -n $VMSS --no-wait
+          done

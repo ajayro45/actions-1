@@ -2,7 +2,7 @@ name: Stop AKS Cluster
 
 on:
   schedule:
-    - cron: "0 20 * * *"  # Runs every day at 22:00 UTC (10 PM UTC)
+    - cron: "0 20 * * *"  # Runs every day at 22:00 CEST (10 PM CEST)
   workflow_dispatch: # Allows manual trigger
 
 jobs:

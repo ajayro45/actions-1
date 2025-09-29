@@ -1,0 +1,21 @@
+name: Start AKS Cluster
+
+on:
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  stop-aks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Stop AKS Cluster Nodes
+        run: |
+          # Variables
+          RESOURCE_GROUP="test"
+          CLUSTER_NAME="aa-test-cluster"
+          az aks start --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
